@@ -1,0 +1,33 @@
+{
+  "name": "birthday_calendar",
+  "version": "1.0.0",
+  "description": "Support to save the birthdays of the people you love",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nguyenlinh0908/birthday_calendar.git"
+  },
+  "keywords": [
+    "birthday"
+  ],
+  "author": "Ling",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nguyenlinh0908/birthday_calendar/issues"
+  },
+  "homepage": "https://github.com/nguyenlinh0908/birthday_calendar#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "bootstrap": "^5.1.3",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+
+}
