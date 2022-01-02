@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const peopleSchema = new mongoose.Schema({
-  name: {
+  fullName: {
     type: String,
     required: [true, "Please provide name"],
   },
@@ -11,13 +11,29 @@ const peopleSchema = new mongoose.Schema({
     length: 10,
   },
   gender: {
-    type: Boolean,
+    type: String,
     required: [true, "Please provide gender"],
   },
   nationality: {
     type: String,
     required: [true, "Please provide nationality"],
   },
+  avatar: {
+    type: String,
+    default: "images/avatar/default.jpg",
+  },
+  facebookUrl: {
+    type: String,
+    default: "#",
+  },
+  instagramUrl: {
+    type: String,
+    default: "#",
+  },
+  twitterUrl: {
+    type: String,
+    default: "#",
+  },
 });
 
-module.exports = mongoose.model("people", modelSchema);
+module.exports = mongoose.model("People", peopleSchema);

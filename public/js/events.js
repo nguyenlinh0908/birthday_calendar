@@ -19,4 +19,65 @@ $(document).ready(() => {
       });
     });
   });
+  // click choose avatar
+  $("#displayAvatar").on("click", (e) => {
+    e.preventDefault();
+    $("#formAvatar").click();
+  });
+  //preview avatar image
+  $("#formAvatar").change((e) => {
+    const file = $("#formAvatar").prop("files")[0];
+    if (file) {
+      $("#displayAvatar").attr("src", URL.createObjectURL(file));
+    }
+  });
+
+  // fetch data
+  $("#formInformation").submit((e) => {
+    e.preventDefault();
+    let fullName,
+      dateOfBirth,
+      gender,
+      nationality,
+      facebook,
+      instagram,
+      twitter,
+      avatar;
+    fullName = $("#formFullName").val();
+    dateOfBirth = $("#formDateOfBirth").val();
+    gender = $("#formGender").val();
+    nationality = $("#formNationality").val();
+    facebook = $("#formFacebook").val();
+    instagram = $("#formInsta").val();
+    twitter = $("#formTwitter").val();
+    avatar = $("#formAvatar").prop("files")[0];
+
+    const formData = new FormData();
+    formData.append("fullName", fullName);
+    formData.append("dateOfBirth", dateOfBirth);
+    formData.append("gender", gender);
+    formData.append("nationality", nationality);
+    formData.append("facebookUrl", facebook);
+    formData.append("instagramUrl", instagram);
+    formData.append("twitterUrl", twitter);
+    formData.append("avatarFile", avatar);
+    console.log("clicked submit");
+    fetch("http://localhost:8000/user", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        $("#informationModal").modal("hide");
+        $(".toast").toast("show");
+        // $(".toast").toast({
+        //   animation: true,
+        //   autohide: true,
+        //   delay: 5000,
+        // });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
 });

@@ -57,6 +57,9 @@
       .modal-open .ui-datepicker {
         z-index: 2000 !important;
       }
+      .toast{
+        z-index: 20001 !important;
+      }
     </style>
     <!---Google Analytics Designmaz.net-->
     <script>
@@ -84,10 +87,39 @@
     </script>
   </head>
   <body>
-    <h1>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col"> <h1>
       <i class="fas fa-birthday-cake"></i> Birthday Calendar
       <i class="fas fa-birthday-cake"></i>
-    </h1>
+    </h1></div>
+        <div class="col">
+          <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+  <!-- Position it -->
+  <div style="position: absolute; top: 0; right: 0;">
+
+    <!-- Then put toasts within -->
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="..." class="rounded mr-2" alt="...">
+        <strong class="mr-auto">Bootstrap</strong>
+        <small class="text-muted">just now</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        See? Just like this.
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+   
+    
     <!--Ads-->
 
     <!-- <div style="text-align:center; margin-top:5px; margin-bottom:5px;">
@@ -429,7 +461,7 @@ data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).pu
               <span aria-hidden="true"><i class="fas fa-times"></i></span>
             </button>
           </div>
-          <form>
+          <form id="formInformation" action="/user" method="post" enctype="multipart/form-data">
             <div class="modal-body">
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row mb-4">
@@ -438,7 +470,7 @@ data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).pu
                     <label class="form-label" for="formFullName"
                       >Full name</label
                     >
-                    <input type="text" id="formFullName" class="form-control" />
+                    <input name="fullName" type="text" id="formFullName" class="form-control" />
                   </div>
                 </div>
                 <div class="col">
@@ -448,6 +480,7 @@ data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).pu
                     >
                     <div class="input-group date" id="datetimepicker8">
                       <input
+                        name="dateOfBirth"
                         type="text"
                         id="formDateOfBirth"
                         class="form-control"
@@ -463,7 +496,7 @@ data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).pu
                   <div class="form-outline">
                     <label class="form-label" for="formGender">Gender</label>
                     <select
-                      name="formGender"
+                      name="gender"
                       id="formGender"
                       class="form-control chosen-select"
                     >
@@ -480,7 +513,7 @@ data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).pu
                       >Nationality</label
                     >
                     <select
-                      name="formNationality"
+                      name="nationality"
                       id="formNationality"
                       class="form-control chosen-select"
                     >
@@ -494,6 +527,68 @@ data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).pu
                       <% }) %>
                     </select>
                   </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="formFacebookLink"
+                      >Facebook</label
+                    >
+                    <div class="input-group" id="formFacebookLink">
+                      <input
+                        name="facebookUrl"
+                        type="text"
+                        id="formFacebook"
+                        class="form-control"
+                      />                     
+                    </div>
+                  </div>
+                  <div class="form-outline">
+                    <label class="form-label" for="formInstaLink"
+                      >Instagram</label
+                    >
+                    <div class="input-group" id="formInstaLink">
+                      <input
+                        name="instagramUrl"
+                        type="text"
+                        id="formInsta"
+                        class="form-control"
+                      />                     
+                    </div>
+                  </div>
+                  <div class="form-outline">
+                    <label class="form-label" for="formTwitterLink"
+                      >Twitter</label
+                    >
+                    <div class="input-group" id="formTwitterLink">
+                      <input
+                        name="twitterUrl"
+                        type="text"
+                        id="formTwitter"
+                        class="form-control"
+                      />                     
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="formAvatarLink"
+                      >Avatar</label
+                    >
+                    <div class="input-group" id="formAvatarLink">
+                      <input
+                        name="avatarFile"
+                        type="file"
+                        id="formAvatar"
+                        class="form-control"
+                        style="display: none;"
+                        accept="image/*"
+                      />                     
+                    </div>
+                    <img id="displayAvatar" class="border w-100" src="images/avatars/default.jpg" alt="">
+                  </div>               
                 </div>
               </div>
             </div>
