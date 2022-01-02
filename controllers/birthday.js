@@ -1,8 +1,16 @@
+const request = require("request");
 const getAllBirthday = (req, res) => {
-  res.send("hello word");
+  request.get(
+    "https://restcountries.com/v3.1/all",
+    function (err, response, body) {
+      if (!err && response.statusCode == 200) {
+       res.render("index", { countries: JSON.parse(body) });
+      }
+    }
+  );
 };
 const pushBirthday = (req, res) => {
-  res.render("index");
+  console.log("push birthday");
 };
 module.exports = {
   getAllBirthday,

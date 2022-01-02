@@ -1,8 +1,10 @@
 require("dotenv").config();
 const routerUser = require("./routers/user");
 const routerAPI = require("./routers/api");
+const connect = require('./database/connect')
 const express = require("express");
 const path = require("path");
+const connectDB = require("./database/connect");
 const app = express();
 
 app.set("view engine", "ejs");
@@ -17,6 +19,7 @@ app.use("/", routerUser);
 const PORT = process.env.PORT || 5000;
 const start = async () => {
   try {
+    await connectDB(process.env.URL)
     app.listen(PORT, () => {
       console.log(`Server is listening on port ${PORT}`);
     });

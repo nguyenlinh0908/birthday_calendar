@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { pushBirthday } = require("../controllers/birthday");
+const { getAllBirthday } = require("../controllers/birthday");
 
-router.route("/").get(pushBirthday);
+router.route("/").get(getAllBirthday);
 module.exports = router;
