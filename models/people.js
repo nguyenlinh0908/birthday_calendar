@@ -34,6 +34,10 @@ const peopleSchema = new mongoose.Schema({
     type: String,
     default: "#",
   },
+  createdBy: {
+    type: String,
+    required: [true, "Please provide createBy"],
+  }
 });
 
 module.exports = mongoose.model("People", peopleSchema);

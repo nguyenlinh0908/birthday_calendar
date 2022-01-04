@@ -58,7 +58,7 @@
         z-index: 2000 !important;
       }
       .toast{
-        z-index: 20001 !important;
+        z-index: 2001 !important;
       }
     </style>
     <!---Google Analytics Designmaz.net-->
@@ -90,46 +90,32 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col"></div>
-        <div class="col"> <h1>
-      <i class="fas fa-birthday-cake"></i> Birthday Calendar
-      <i class="fas fa-birthday-cake"></i>
-    </h1></div>
+        <div class="col">
+          <h1>
+            <i class="fas fa-birthday-cake"></i> Birthday Calendar
+            <i class="fas fa-birthday-cake"></i>
+          </h1>
+        </div>
         <div class="col">
           <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-  <!-- Position it -->
-  <div style="position: absolute; top: 0; right: 0;">
-
-    <!-- Then put toasts within -->
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded mr-2" alt="...">
-        <strong class="mr-auto">Bootstrap</strong>
-        <small class="text-muted">just now</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">
-        See? Just like this.
-      </div>
-    </div>
-  </div>
-</div>
+            <!-- Position it -->
+            <div style="position: absolute; top: 0; right: 0;">
+              <!-- Then put toasts within -->
+              <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                  <img style="width: 25px;" src="images/logo.png" class="rounded mr-2" alt="logo">
+                  <strong id="toast_title" class="mr-auto mr-3">Unknown</strong>
+                
+                </div>
+                <div class="toast-body">
+                  Unknown
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-   
-    
-    <!--Ads-->
-
-    <!-- <div style="text-align:center; margin-top:5px; margin-bottom:5px;">
-				<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="ca-pub-8011246932591811"
-data-ad-slot="9844648019"
-data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8011246932591811" crossorigin="anonymous"></script>				</div> -->
-    <!--End ads-->
     <div class="main hvr-float-shadow">
       <div class="slide">
         <div id="dd1" class="wrapper-dropdown-3" tabindex="1">
@@ -170,56 +156,14 @@ data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).pu
         </div>
 
         <div class="callbacks_container">
-          <ul class="rslides callbacks callbacks1" id="slider4">
-            <li>
-              <div class="banner-info">
-                <h3>Fri Day</h3>
-                <p>April 3rd</p>
-                <img src="images/1.jpg" alt="" />
-              </div>
-            </li>
-            <li>
-              <div class="banner-info">
-                <h3>Sat Day</h3>
-                <p>April 3rd</p>
-                <img src="images/2.jpg" alt="" />
-              </div>
-            </li>
-            <li>
-              <div class="banner-info">
-                <h3>Sun Day</h3>
-                <p>April 3rd</p>
-                <img src="images/1.jpg" alt="" />
-              </div>
-            </li>
+          <ul class="rslides callbacks callbacks1" id="slider4">       
           </ul>
         </div>
-        <!--banner-Slider-->
-        <script src="js/responsiveslides.min.js"></script>
-        <script>
-          // You can also use "$(window).load(function() {"
-          $(function () {
-            // Slideshow 4
-            $("#slider4").responsiveSlides({
-              auto: true,
-              pager: true,
-              nav: false,
-              speed: 500,
-              namespace: "callbacks",
-              before: function () {
-                $(".events").append("<li>before event fired.</li>");
-              },
-              after: function () {
-                $(".events").append("<li>after event fired.</li>");
-              },
-            });
-          });
-        </script>
         <div class="clear"></div>
         <ul class="side-icons">
-          <li><a class="fb" href="#"></a></li>
-          <li><a class="twitt" href="#"></a></li>
-          <li><a class="goog" href="#"></a></li>
+          <li><a id="fbUrl" class="fb" href="#" target="_blank"></a></li>
+          <li><a id="instaUrl" class="twitt" href="#" target="_blank"></a></li>
+          <li><a class="goog" href="#" target="_blank"></a></li>
         </ul>
       </div>
       <div class="mini-cal">
@@ -629,5 +573,7 @@ data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).pu
         },
       });
     </script>
+    <!--banner-Slider-->
+    <script src="js/responsiveslides.min.js"></script>      
   </body>
 </html>
