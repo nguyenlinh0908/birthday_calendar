@@ -23,29 +23,7 @@
           aria-live="polite"
           aria-atomic="true"
           style="position: relative; min-height: 200px"
-        >
-          <!-- Position it -->
-          <div style="position: absolute; top: 0; right: 0">
-            <!-- Then put toasts within -->
-            <div
-              class="toast"
-              role="alert"
-              aria-live="assertive"
-              aria-atomic="true"
-            >
-              <div class="toast-header">
-                <img
-                  style="width: 25px"
-                  src="images/logo.png"
-                  class="rounded mr-2"
-                  alt="logo"
-                />
-                <strong id="toast_title" class="mr-auto mr-3">Unknown</strong>
-              </div>
-              <div class="toast-body">Unknown</div>
-            </div>
-          </div>
-        </div>
+        ></div>
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-11">
             <div class="card text-black" style="border-radius: 25px">
@@ -144,11 +122,37 @@
                       </div>
                     </form>
                     <div>
-                        <a href="/login">Login</a></div>
+                      <a href="/login">Login</a>
+                    </div>
                   </div>
                   <div
                     class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"
                   >
+                    <div
+                      class="p-3"
+                      style="position: absolute; top: 0; right: 0"
+                    >
+                      <!-- Then put toasts within -->
+                      <div
+                        class="toast"
+                        role="alert"
+                        aria-live="assertive"
+                        aria-atomic="true"
+                      >
+                        <div class="toast-header">
+                          <img
+                            style="width: 25px"
+                            src="images/logo.png"
+                            class="rounded mr-2"
+                            alt="logo"
+                          />
+                          <strong id="toast_title" class="mr-auto mr-3"
+                            >Unknown</strong
+                          >
+                        </div>
+                        <div class="toast-body">Unknown</div>
+                      </div>
+                    </div>
                     <img
                       src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                       class="img-fluid"

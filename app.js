@@ -62,8 +62,7 @@ app.use(passport.initialize());
 app.use(session({ secret: process.env.SECRET_KEY }));
 app.use(passport.session());
 app.use("/api/v1/birthday", routerAPI);
-app.use("/", routerUser);
-
+app.use("/",routerUser);
 const PORT = process.env.PORT || 5000;
 const start = async () => {
   try {

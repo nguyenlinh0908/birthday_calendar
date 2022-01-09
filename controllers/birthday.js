@@ -22,6 +22,7 @@ const getBirthdaysOfMonth = async (req, res) => {
   res.status(StatusCodes.OK).json({ birthdays});
 };
 const getAllBirthday = (req, res) => {
+  const verified = res.locals.verified;
   request.get(
     "https://restcountries.com/v3.1/all",
     function (err, response, body) {
