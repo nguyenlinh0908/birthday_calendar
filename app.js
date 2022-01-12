@@ -17,6 +17,23 @@ const app = express();
 const key = fs.readFileSync("./cert/CA/localhost/localhost.decrypted.key");
 const cert = fs.readFileSync("./cert/CA/localhost/localhost.crt");
 const server = https.createServer({ key, cert }, app);
+
+// defence
+const helmet = require("helmet");
+const cors = require("cors");
+const xss = require("xss-clean");
+const rateLimiter = require("express-rate-limit");
+
+app.use(
+  rateLimiter({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+  })
+);
+app.use(helmet());
+app.use(cors());
+app.use(xss());
+
 app.set("view engine", "ejs");
 // Passport session setup.
 passport.serializeUser(function (user, done) {
@@ -44,13 +61,13 @@ passport.deserializeUser(function (id, done) {
 //       ],
 //     },
 //     (accessToken, refreshToken, profile, done) => {
-//       // process.nextTick(function () {
-//       //   //Check whether the User exists or not using profile.id
-//       //   if (config.use_database) {
-//       //     //Further code of Database.
-//       //   }
-//       //   return done(null, profile);
-//       // });
+//       process.nextTick(function () {
+//         //Check whether the User exists or not using profile.id
+//         if (config.use_database) {
+//           //Further code of Database.
+//         }
+//         return done(null, profile);
+//       });
 //       return done(null, profile);
 //     }
 //   )
@@ -86,7 +103,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false, // Remember to set this
   })
