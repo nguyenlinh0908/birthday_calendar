@@ -4,10 +4,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+    <!-- <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self' data: gap: https://manager-birthday-calendar.herokuapp.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://manager-birthday-calendar.herokuapp.com/ 'unsafe-inline' 'unsafe-eval';** "
-    />
+    /> -->
     <!-- <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self' data: gap: https://cdnjs.cloudflare.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://cdnjs.cloudflare.com/ 'unsafe-inline' 'unsafe-eval';** "
@@ -17,7 +18,7 @@
       content="default-src 'self' data: gap: https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/ 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/ 'unsafe-inline' 'unsafe-eval';** "
     /> -->
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/scripts/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="icon" type="image/png" href="images/logo.png" />
     <title>Birthday | Calendar</title>
     <style>
@@ -159,9 +160,7 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script
-      src="/scripts/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
+      src="/scripts/bootstrap/dist/js/bootstrap.bundle.min.js"
     ></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->

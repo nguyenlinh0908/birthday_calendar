@@ -93,10 +93,7 @@ passport.use(
   )
 );
 app.use(express.static(__dirname + "/public"));
-app.use(
-  "/scripts",
-  express.static(path.join(__dirname, "node_modules/bootstrap/dist"))
-);
+app.use("/scripts", express.static(path.join(__dirname, "node_modules")));
 
 app.use(cookieParse());
 app.use(bodyParser.json());
