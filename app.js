@@ -131,13 +131,6 @@ app.use(
 );
 app.use(
   "/",
-  (req, res, next) => {
-    if (!req.route) {
-      res.render("errors/error_404");
-    } else {
-      next();
-    }
-  },
   routerUser
 );
 const PORT = process.env.PORT || 5000;
