@@ -35,9 +35,11 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
-app.use(cors({
-  origin: '*'
-}));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(xss());
 
 app.set("view engine", "ejs");
@@ -116,8 +118,28 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use("/api/v1/birthday", routerAPI);
-app.use("/", routerUser);
+app.use(
+  "/api/v1/birthday",
+  (req, res, next) => {
+    if (!req.route) {
+      res.render("errors/error_404");
+    } else {
+      next();
+    }
+  },
+  routerAPI
+);
+app.use(
+  "/",
+  (req, res, next) => {
+    if (!req.route) {
+      res.render("errors/error_404");
+    } else {
+      next();
+    }
+  },
+  routerUser
+);
 const PORT = process.env.PORT || 5000;
 const start = async () => {
   try {
