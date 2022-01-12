@@ -1,42 +1,15 @@
 $(document).ready(() => {
-  loginRequest();
+ // loginRequest();
 });
-
 function loginRequest() {
-  $("form").on("submit", (e) => {
+  $("#btnSubmit").on("click", (e) => {
     e.preventDefault();
     const { status, information } = validateInput();
     if (status) {
-      fetch("/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": " application/json",
-        },
-        body: JSON.stringify({
-          email: information.email,
-          password: information.password,
-        }),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          const { status, token, message } = result;
-          if (status) {
-            localStorage.setItem("token", token);
-            window.location.replace('/user')
-          }
-        })
-        .catch((error) => {
-          setMessage({
-            title: "Birthday calendar",
-            content: "Login fail",
-            bg: "bg-danger",
-          });
-          console.error("Error:", error);
-        });
+      $("form").submit();
     }
   });
 }
-
 function validateInput() {
   let status = false;
   const email = $("#floatingInput");

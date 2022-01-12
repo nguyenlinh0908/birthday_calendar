@@ -2,12 +2,15 @@ require("dotenv").config();
 const routerUser = require("./routers/user");
 const routerAPI = require("./routers/api");
 const bodyParser = require("body-parser");
+const cookieParse = require("cookie-parser");
 const express = require("express");
 const https = require("https");
 const fs = require("fs");
 const passport = require("passport");
 const session = require("express-session");
 const facebookStrategy = require("passport-facebook").Strategy;
+const localStrategy = require("passport-local").Strategy;
+const Account = require("./models/accounts");
 const path = require("path");
 const connectDB = require("./database/connect");
 const app = express();
@@ -17,36 +20,58 @@ const server = https.createServer({ key, cert }, app);
 app.set("view engine", "ejs");
 // Passport session setup.
 passport.serializeUser(function (user, done) {
-  done(null, user);
+  done(null, user._id);
 });
 
-passport.deserializeUser(function (obj, done) {
-  done(null, obj);
+passport.deserializeUser(function (id, done) {
+  Account.findById(id, function (err, account) {
+    done(err, account);
+  });
 });
+// passport.use(
+//   new facebookStrategy(
+//     {
+//       clientID: process.env.FB_CLIENT_ID,
+//       clientSecret: process.env.FB_CLIENT_SECRET,
+//       callbackURL: process.env.FB_CALLBACK_URL,
+//       profileFields: [
+//         "id",
+//         "displayName",
+//         "name",
+//         "gender",
+//         "picture.type(large)",
+//         "email",
+//       ],
+//     },
+//     (accessToken, refreshToken, profile, done) => {
+//       // process.nextTick(function () {
+//       //   //Check whether the User exists or not using profile.id
+//       //   if (config.use_database) {
+//       //     //Further code of Database.
+//       //   }
+//       //   return done(null, profile);
+//       // });
+//       return done(null, profile);
+//     }
+//   )
+// );
 passport.use(
-  new facebookStrategy(
-    {
-      clientID: process.env.FB_CLIENT_ID,
-      clientSecret: process.env.FB_CLIENT_SECRET,
-      callbackURL: process.env.FB_CALLBACK_URL,
-      profileFields: [
-        "id",
-        "displayName",
-        "name",
-        "gender",
-        "picture.type(large)",
-        "email",
-      ],
-    },
-    (accessToken, refreshToken, profile, done) => {
-      // process.nextTick(function () {
-      //   //Check whether the User exists or not using profile.id
-      //   if (config.use_database) {
-      //     //Further code of Database.
-      //   }
-      //   return done(null, profile);
-      // });
-      return done(null, profile);
+  "local",
+  new localStrategy(
+    { usernameField: "email", passwordField: "password" },
+    function (email, password, done) {
+      Account.findOne({ email: email }, function (err, account) {
+        if (err) {
+          return done(err);
+        }
+        if (!account) {
+          return done(null, false);
+        }
+        if (!account.comparePassword(password)) {
+          return done(null, false);
+        }
+        return done(null, account);
+      });
     }
   )
 );
@@ -55,14 +80,21 @@ app.use(
   "/scripts",
   express.static(path.join(__dirname, "node_modules/bootstrap/dist"))
 );
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
+app.use(cookieParse());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false, // Remember to set this
+  })
+);
 app.use(passport.initialize());
-app.use(session({ secret: process.env.SECRET_KEY }));
 app.use(passport.session());
 app.use("/api/v1/birthday", routerAPI);
-app.use("/",routerUser);
+app.use("/", routerUser);
 const PORT = process.env.PORT || 5000;
 const start = async () => {
   try {

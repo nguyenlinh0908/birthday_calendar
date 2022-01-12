@@ -2,8 +2,6 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 const upload = require("../middleware/uploadMiddleware");
-const verifyToken = require("../middleware/verifyToken");
-
 const {
   getBirthdaysOfMonth,
   getAllBirthday,
@@ -15,16 +13,44 @@ const {
   createAccount,
   findAccount,
 } = require("../controllers/user");
-router.route('/').get(login)
+const { error_404 } = require("../controllers/error_handler");
+router.route("/404").get(error_404);
+router.route("/").get(login);
+// user permission
 router
   .route("/user")
-  .get(verifyToken, getAllBirthday)
-  .post(verifyToken, upload.single("avatarFile"), createBirthday);
+  .get((req, res, next) => {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/404");
+    }
+  }, getAllBirthday)
+  .post(
+    (req, res, next) => {
+      if (req.isAuthenticated()) {
+        next();
+      } else {
+        res.redirect("/404");
+      }
+    },
+    upload.single("avatarFile"),
+    createBirthday
+  );
 
-router.route("/birthdays/month").get(verifyToken,getBirthdaysOfMonth);
-// module login
-router.route("/login").get(login).post(findAccount);
+router.route("/birthdays/month").get(getBirthdaysOfMonth);
+// module login and register
+router
+  .route("/login")
+  .get(login)
+  .post(
+    passport.authenticate("local", {
+      successRedirect: "/user",
+      failureRedirect: "/login",
+    })
+  );
 router.route("/register").get(register).post(createAccount);
+// login with thirty party account
 router
   .route("/auth/facebook")
   .get(passport.authenticate("facebook", { scope: "email" }));

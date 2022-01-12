@@ -1,6 +1,6 @@
 $(document).ready(() => {
   getBirthdays();
-
+  callAPICountries();
   // custome modal
   const optionsMenu = $("#optionsMenu");
   const declarationForm = optionsMenu.children(":first");
@@ -86,7 +86,7 @@ $(document).ready(() => {
           content: "create birthday success",
           bg: "bg-success",
         });
-        getBirthdays()
+        getBirthdays();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -112,19 +112,19 @@ function getBirthdays() {
     .then((data) => {
       const birthdays = data.birthdays;
       let now = new Date();
-      let currentYear = now.getFullYear()
+      let currentYear = now.getFullYear();
       let monthText = now.toDateString().split(" ")[1];
-      let renderContent = ''
+      let renderContent = "";
       birthdays.forEach((birthday) => {
-        let dateOfBirthday = birthday['dateOfBirth'].split('/')
-        let birthdayMonth = dateOfBirthday[1]
-        let birthdayDay = dateOfBirthday[0]
+        let dateOfBirthday = birthday["dateOfBirth"].split("/");
+        let birthdayMonth = dateOfBirthday[1];
+        let birthdayDay = dateOfBirthday[0];
 
-        if(birthdayMonth[1] > 0){
-          let charSecond = parseInt(birthdayMonth[1]) - 1
+        if (birthdayMonth[1] > 0) {
+          let charSecond = parseInt(birthdayMonth[1]) - 1;
           birthdayMonth = birthdayMonth[0] + charSecond;
         }
-        let targetDate = new Date(currentYear, birthdayMonth, birthdayDay); 
+        let targetDate = new Date(currentYear, birthdayMonth, birthdayDay);
         let weekDay = targetDate.toDateString().split(" ")[0];
         let day = targetDate.toDateString().split(" ")[2];
         renderContent += `
@@ -136,9 +136,9 @@ function getBirthdays() {
         </div>
       </li>`;
       });
-      let lengthBirthdays = birthdays.length
-      let pos = 0
-      $("#slider4").html(renderContent)
+      let lengthBirthdays = birthdays.length;
+      let pos = 0;
+      $("#slider4").html(renderContent);
       $("#slider4").responsiveSlides({
         auto: true,
         pager: true,
@@ -147,15 +147,30 @@ function getBirthdays() {
         namespace: "callbacks",
         before: function () {
           $(".events").append("<li>before event fired.</li>");
-          if(pos > lengthBirthdays - 1){
-            pos = 0
+          if (pos > lengthBirthdays - 1) {
+            pos = 0;
           }
-          $("#fbUrl").attr('href', birthdays[pos].facebookUrl);
-          ++pos
+          $("#fbUrl").attr("href", birthdays[pos].facebookUrl);
+          ++pos;
         },
         after: function () {
-          $(".events").append("<li>after event fired.</li>");       
+          $(".events").append("<li>after event fired.</li>");
         },
-      });     
+      });
     });
+}
+
+function callAPICountries() {
+  $.get("https://restcountries.com/v3.1/all").then((result) => {
+    const countries = result;
+    $.each(countries, (index, country) => {
+      $("#formNationality").append(
+        $("<option>", {
+          value: country["ccn3"],
+          text: country["name"]["common"],
+        })
+      );
+    });
+    $(".chosen-select").chosen({ width: "100%" });
+  });
 }

@@ -1,5 +1,4 @@
 const Account = require("../models/accounts");
-const request = require("request");
 const { StatusCodes } = require("http-status-codes");
 const {
   BadRequestError,
@@ -34,12 +33,8 @@ const findAccount = async (req, res) => {
   if (!account) {
     throw new UnauthenticatedError("Invalid Credentials");
   }
-  const token = account.createJWT();
-  req.app.set("token", token);
-  return res
-    .status(StatusCodes.OK)
-    .json({ status: true, token: token, message: "Login successfully" })
-    //.redirect("/user");
+
+  return res.status(StatusCodes.OK).redirect("/user");
 };
 module.exports = {
   login,

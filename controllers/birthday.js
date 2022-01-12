@@ -1,8 +1,7 @@
-const request = require("request");
 const Resize = require("../libraries/resize");
 const People = require("../models/people");
 const path = require("path");
-const passport = require('passport')
+const passport = require("passport");
 const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, NotFoundError } = require("../errors");
 
@@ -10,27 +9,22 @@ const getBirthdaysOfMonth = async (req, res) => {
   const today = new Date();
   let year = today.getFullYear();
   let month = today.getMonth();
-  if(month < 10){
-    month = `0${month + 1}`
+  if (month < 10) {
+    month = `0${month + 1}`;
   }
+  const { id, name, email, password, createAt } = req.user;
+
   const birthdays = await People.find({
     dateOfBirth: { $regex: `[0-9]{2}\/${month}\/[0-9]{4}` },
-  });
+    createdBy: id,
+  }).exec();
   if (!birthdays) {
     throw new NotFoundError(`No birthday in month ${month}`);
   }
-  res.status(StatusCodes.OK).json({ birthdays});
+  res.status(StatusCodes.OK).json({ birthdays });
 };
 const getAllBirthday = (req, res) => {
-  const verified = res.locals.verified;
-  request.get(
-    "https://restcountries.com/v3.1/all",
-    function (err, response, body) {
-      if (!err && response.statusCode == 200) {
-        res.render("index", { countries: JSON.parse(body) });
-      }
-    }
-  );
+  res.render("index");
 };
 const createBirthday = async (req, res, next) => {
   const {
@@ -43,6 +37,7 @@ const createBirthday = async (req, res, next) => {
     twitterUrl,
     avatarFile,
   } = req.body;
+  const { id, name, email, password, createAt } = req.user;
   if (
     fullName === "" ||
     dateOfBirth === "" ||
@@ -70,6 +65,7 @@ const createBirthday = async (req, res, next) => {
     facebookUrl: facebookUrl,
     instagramUrl: instagramUrl,
     twitterUrl: twitterUrl,
+    createdBy: id,
   };
   const peopleInserted = await People.create(people);
   res.status(StatusCodes.CREATED).json({ peopleInserted });

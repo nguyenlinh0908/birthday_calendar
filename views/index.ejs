@@ -57,7 +57,7 @@
       .modal-open .ui-datepicker {
         z-index: 2000 !important;
       }
-      .toast{
+      .toast {
         z-index: 2001 !important;
       }
     </style>
@@ -97,19 +97,30 @@
           </h1>
         </div>
         <div class="col">
-          <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+          <div
+            aria-live="polite"
+            aria-atomic="true"
+            style="position: relative; min-height: 200px"
+          >
             <!-- Position it -->
-            <div style="position: absolute; top: 0; right: 0;">
+            <div style="position: absolute; top: 0; right: 0">
               <!-- Then put toasts within -->
-              <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+              <div
+                class="toast"
+                role="alert"
+                aria-live="assertive"
+                aria-atomic="true"
+              >
                 <div class="toast-header">
-                  <img style="width: 25px;" src="images/logo.png" class="rounded mr-2" alt="logo">
+                  <img
+                    style="width: 25px"
+                    src="images/logo.png"
+                    class="rounded mr-2"
+                    alt="logo"
+                  />
                   <strong id="toast_title" class="mr-auto mr-3">Unknown</strong>
-                
                 </div>
-                <div class="toast-body">
-                  Unknown
-                </div>
+                <div class="toast-body">Unknown</div>
               </div>
             </div>
           </div>
@@ -156,8 +167,7 @@
         </div>
 
         <div class="callbacks_container">
-          <ul class="rslides callbacks callbacks1" id="slider4">       
-          </ul>
+          <ul class="rslides callbacks callbacks1" id="slider4"></ul>
         </div>
         <div class="clear"></div>
         <ul class="side-icons">
@@ -200,24 +210,12 @@
                   <tbody>
                     <tr>
                       <td
-                        class="
-                          day
-                          past
-                          adjacent-month
-                          last-month
-                          calendar-day-2015-08-30
-                        "
+                        class="day past adjacent-month last-month calendar-day-2015-08-30"
                       >
                         <div class="day-contents">30</div>
                       </td>
                       <td
-                        class="
-                          day
-                          past
-                          adjacent-month
-                          last-month
-                          calendar-day-2015-08-31
-                        "
+                        class="day past adjacent-month last-month calendar-day-2015-08-31"
                       >
                         <div class="day-contents">31</div>
                       </td>
@@ -320,32 +318,17 @@
                         <div class="day-contents">30</div>
                       </td>
                       <td
-                        class="
-                          day
-                          adjacent-month
-                          next-month
-                          calendar-day-2015-10-01
-                        "
+                        class="day adjacent-month next-month calendar-day-2015-10-01"
                       >
                         <div class="day-contents">1</div>
                       </td>
                       <td
-                        class="
-                          day
-                          adjacent-month
-                          next-month
-                          calendar-day-2015-10-02
-                        "
+                        class="day adjacent-month next-month calendar-day-2015-10-02"
                       >
                         <div class="day-contents">2</div>
                       </td>
                       <td
-                        class="
-                          day
-                          adjacent-month
-                          next-month
-                          calendar-day-2015-10-03
-                        "
+                        class="day adjacent-month next-month calendar-day-2015-10-03"
                       >
                         <div class="day-contents">3</div>
                       </td>
@@ -405,7 +388,12 @@
               <span aria-hidden="true"><i class="fas fa-times"></i></span>
             </button>
           </div>
-          <form id="formInformation" action="/user" method="post" enctype="multipart/form-data">
+          <form
+            id="formInformation"
+            action="/user"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <div class="modal-body">
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row mb-4">
@@ -414,7 +402,12 @@
                     <label class="form-label" for="formFullName"
                       >Full name</label
                     >
-                    <input name="fullName" type="text" id="formFullName" class="form-control" />
+                    <input
+                      name="fullName"
+                      type="text"
+                      id="formFullName"
+                      class="form-control"
+                    />
                   </div>
                 </div>
                 <div class="col">
@@ -464,11 +457,7 @@
                       <option value="" disabled selected>
                         Select nationality
                       </option>
-                      <% countries.forEach(function(country, index){ %>
-                      <option value=<%= country['ccn3'] %> >
-                        <%= country['name']['common'] %>
-                      </option>
-                      <% }) %>
+                      
                     </select>
                   </div>
                 </div>
@@ -486,7 +475,7 @@
                         type="text"
                         id="formFacebook"
                         class="form-control"
-                      />                     
+                      />
                     </div>
                   </div>
                   <div class="form-outline">
@@ -499,7 +488,7 @@
                         type="text"
                         id="formInsta"
                         class="form-control"
-                      />                     
+                      />
                     </div>
                   </div>
                   <div class="form-outline">
@@ -512,7 +501,7 @@
                         type="text"
                         id="formTwitter"
                         class="form-control"
-                      />                     
+                      />
                     </div>
                   </div>
                 </div>
@@ -527,12 +516,17 @@
                         type="file"
                         id="formAvatar"
                         class="form-control"
-                        style="display: none;"
+                        style="display: none"
                         accept="image/*"
-                      />                     
+                      />
                     </div>
-                    <img id="displayAvatar" class="border w-100" src="images/avatars/default.jpg" alt="">
-                  </div>               
+                    <img
+                      id="displayAvatar"
+                      class="border w-100"
+                      src="images/avatars/default.jpg"
+                      alt=""
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -552,7 +546,6 @@
     </div>
     <script src="js/events.js"></script>
     <script>
-      $(".chosen-select").chosen({ width: "100%" });
       $("#formDateOfBirth").datepicker({
         // Formats
         // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
@@ -574,6 +567,6 @@
       });
     </script>
     <!--banner-Slider-->
-    <script src="js/responsiveslides.min.js"></script>      
+    <script src="js/responsiveslides.min.js"></script>
   </body>
 </html>
