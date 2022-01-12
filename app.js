@@ -30,7 +30,11 @@ app.use(
     max: 100, // limit each IP to 100 requests per windowMs
   })
 );
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(cors());
 app.use(xss());
 
