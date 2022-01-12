@@ -14,9 +14,9 @@ const Account = require("./models/accounts");
 const path = require("path");
 const connectDB = require("./database/connect");
 const app = express();
-const key = fs.readFileSync("./cert/CA/localhost/localhost.decrypted.key");
-const cert = fs.readFileSync("./cert/CA/localhost/localhost.crt");
-const server = https.createServer({ key, cert }, app);
+// const key = fs.readFileSync("./cert/CA/localhost/localhost.decrypted.key");
+// const cert = fs.readFileSync("./cert/CA/localhost/localhost.crt");
+// const server = https.createServer({ key, cert }, app);
 
 // defence
 const helmet = require("helmet");
