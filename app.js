@@ -35,7 +35,9 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 app.use(xss());
 
 app.set("view engine", "ejs");
