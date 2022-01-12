@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta http-equiv="content-type" content="text/html; charset=utf-8 ;" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- <meta
       http-equiv="content-security-policy"
@@ -10,9 +9,10 @@
   connect-src 'self'; img-src 'self';
   style-src 'self' 'sha256-E/YRUHq5LMOGI/podj034hH17EleqpoVcowAx32phKU=';"
     /> -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8 ;" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self' data: gap: https://manager-birthday-calendar.herokuapp.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://manager-birthday-calendar.herokuapp.com/ 'unsafe-inline' 'unsafe-eval';** "
+      content="script-src 'self' https://manager-birthday-calendar.herokuapp.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://manager-birthday-calendar.herokuapp.com"
     />
     <!-- <meta
       http-equiv="Content-Security-Policy"
