@@ -19,9 +19,6 @@ const app = express();
 // const server = https.createServer({ key, cert }, app);
 
 // defence
-const helmet = require("helmet");
-const cors = require("cors");
-const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
 
 app.use(
@@ -30,17 +27,6 @@ app.use(
     max: 100, // limit each IP to 100 requests per windowMs
   })
 );
-// app.use(
-//   helmet({
-//     contentSecurityPolicy: false,
-//   })
-// );
-// app.use(
-//   cors({
-//     origin: "*",
-//   })
-// );
-// app.use(xss());
 
 app.set("view engine", "ejs");
 // Passport session setup.

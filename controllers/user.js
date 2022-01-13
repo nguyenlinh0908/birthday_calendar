@@ -11,6 +11,10 @@ const login = (req, res) => {
 const register = (req, res) => {
   res.render("register");
 };
+const logout = (req, res)=>{
+  req.logout()
+  res.redirect('/')
+}
 const createAccount = async (req, res) => {
   const { name, email, password } = req.body;
   const date = new Date();
@@ -41,4 +45,5 @@ module.exports = {
   register,
   createAccount,
   findAccount,
+  logout
 };

@@ -11,7 +11,7 @@ const {
   login,
   register,
   createAccount,
-  findAccount,
+  logout,
 } = require("../controllers/user");
 const { error_404 } = require("../controllers/error_handler");
 router.route("/404").get(error_404);
@@ -49,6 +49,13 @@ router
       failureRedirect: "/login",
     })
   );
+router.route("/logout").get((req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/404");
+  }
+}, logout);
 router.route("/register").get(register).post(createAccount);
 // login with thirty party account
 router
@@ -60,5 +67,4 @@ router.route("/auth/facebook/callback").get(
     failureRedirect: "/login",
   })
 );
-router.route("/logout").get();
 module.exports = router;
