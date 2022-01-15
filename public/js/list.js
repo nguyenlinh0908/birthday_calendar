@@ -15,7 +15,7 @@ function setValueForSelect() {
     var d = new Date(i + 1 + "/1");
     let valueOfMonth = "";
     let selected = "";
-    i < 10 ? (valueOfMonth = `0${i + 1}`) : (valueOfMonth = i + 1);
+    i < 9 ? (valueOfMonth = `0${i + 1}`) : (valueOfMonth = i + 1);
     monthNow.localeCompare(valueOfMonth) == 0
       ? (selected = "selected")
       : (selected = selected);
