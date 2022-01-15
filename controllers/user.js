@@ -5,6 +5,7 @@ const {
   UnauthenticatedError,
   NotFoundError,
 } = require("../errors");
+//login logout and register
 const login = (req, res) => {
   res.render("login");
 };
@@ -15,6 +16,8 @@ const logout = (req, res)=>{
   req.logout()
   res.redirect('/')
 }
+
+// create account
 const createAccount = async (req, res) => {
   const { name, email, password } = req.body;
   const date = new Date();

@@ -134,10 +134,7 @@
           <span><img src="images/nav.png" alt="" /></span>
           <ul class="dropdown" id="optionsMenu">
             <li><a href="#">Add birthday</a></li>
-            <li><a href="#">View Profile </a></li>
-            <li><a href="#">Lists</a></li>
-            <li><a href="#">Activity log</a></li>
-            <li><a href="#">Report a problem</a></li>
+            <li><a href="/list" target="_blank">List</a></li>
             <li><a href="/logout">Log Out</a></li>
           </ul>
 
@@ -422,6 +419,7 @@
                         type="text"
                         id="formDateOfBirth"
                         class="form-control"
+                        autocomplete="off"
                       />
                     </div>
                   </div>
@@ -549,7 +547,7 @@
       $("#formDateOfBirth").datepicker({
         // Formats
         // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
-        format: "DD-MM-YYYY hh:mm A",
+        dateFormat: "dd/mm/yy",
         container: "#informationModal",
         // Your Icons
         // as Bootstrap 4 is not using Glyphicons anymore

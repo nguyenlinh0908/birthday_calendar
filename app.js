@@ -21,12 +21,12 @@ const app = express();
 // defence
 const rateLimiter = require("express-rate-limit");
 
-app.use(
-  rateLimiter({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-  })
-);
+// app.use(
+//   rateLimiter({
+//     windowMs: 15 * 60 * 1000, // 15 minutes
+//     max: 100, // limit each IP to 100 requests per windowMs
+//   })
+// );
 
 app.set("view engine", "ejs");
 // Passport session setup.
@@ -103,7 +103,14 @@ app.use(
   })
 );
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(
+  passport.session({
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env.SECRET_KEY,
+    cookie: { maxAge: 60000 },
+  })
+);
 app.use(
   "/api/v1/birthday",
   (req, res, next) => {

@@ -6,6 +6,9 @@ const {
   getBirthdaysOfMonth,
   getAllBirthday,
   createBirthday,
+  listBirthday,
+  editBirthday,
+  deleteBirthday
 } = require("../controllers/birthday");
 const {
   login,
@@ -37,8 +40,37 @@ router
     upload.single("avatarFile"),
     createBirthday
   );
-
 router.route("/birthdays/month").get(getBirthdaysOfMonth);
+router
+  .route("/list")
+  .get((req, res, next) => {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/404");
+    }
+  }, listBirthday)
+  .post((req, res, next) => {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/404");
+    }
+  }, getBirthdaysOfMonth);
+router.route("/user/birthday/edit").post((req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/404");
+  }
+}, upload.single("avatarFile"),editBirthday);
+router.route("/user/birthday/delete").post((req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/404");
+  }
+}, deleteBirthday);
 // module login and register
 router
   .route("/login")

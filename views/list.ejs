@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Birthday | Calendar</title>
+    <link rel="icon" type="image/png" href="images/logo.png" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+    <!--chosen custom select option-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/jQuery-plugin-progressbar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+    <style>
+      .modal-open .ui-datepicker {
+        z-index: 2002 !important;
+      }
+      .toast {
+        z-index: 2001 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div
+            aria-live="polite"
+            aria-atomic="true"
+            style="position: relative; min-height: 200px"
+          >
+            <!-- Position it -->
+            <div style="position: absolute; top: 0; right: 0">
+              <!-- Then put toasts within -->
+              <div
+                class="toast"
+                role="alert"
+                aria-live="assertive"
+                aria-atomic="true"
+              >
+                <div class="toast-header">
+                  <img
+                    style="width: 25px"
+                    src="images/logo.png"
+                    class="rounded mr-2"
+                    alt="logo"
+                  />
+                  <strong id="toast_title" class="mr-auto mr-3">Unknown</strong>
+                </div>
+                <div class="toast-body">Unknown</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row pt-3">
+        <div class="col">
+          <div class="month-container d-flex justify-content-end">
+            <select
+              class="form-select w-25"
+              aria-label="Default select example"
+            >
+              <option selected>Open this select menu</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="table caption-top">
+            <caption>
+              Birthday of month
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Full name</th>
+                <th scope="col">Date of birth</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Nationality</th>
+                <th scope="col">Options</th>
+              </tr>
+            </thead>
+            <tbody id="list-birthday_container"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="informationModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="informationModalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="informationModalTitle">
+              Information Declaration
+            </h5>
+            <button
+              type="button"
+              class="close btn"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true"><i class="fas fa-times"></i></span>
+            </button>
+          </div>
+          <form
+            id="formInformation"
+            action="/user"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="modal-body">
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="formFullName"
+                      >Full name</label
+                    >
+                    <input
+                      name="fullName"
+                      type="text"
+                      id="formFullName"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="formDateOfBirth"
+                      >Date of Birth</label
+                    >
+                    <div class="input-group date" id="datetimepicker8">
+                      <input
+                        name="dateOfBirth"
+                        type="text"
+                        id="formDateOfBirth"
+                        class="form-control"
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- nationality input -->
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="formGender">Gender</label>
+                    <select
+                      name="gender"
+                      id="formGender"
+                      class="form-control chosen-select"
+                    >
+                      <option value="" disabled selected>Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="formNationality"
+                      >Nationality</label
+                    >
+                    <select
+                      name="nationality"
+                      id="formNationality"
+                      class="form-control chosen-select"
+                    >
+                      <option value="" disabled selected>
+                        Select nationality
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="formFacebookLink"
+                      >Facebook</label
+                    >
+                    <div class="input-group" id="formFacebookLink">
+                      <input
+                        name="facebookUrl"
+                        type="text"
+                        id="formFacebook"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-outline">
+                    <label class="form-label" for="formInstaLink"
+                      >Instagram</label
+                    >
+                    <div class="input-group" id="formInstaLink">
+                      <input
+                        name="instagramUrl"
+                        type="text"
+                        id="formInsta"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-outline">
+                    <label class="form-label" for="formTwitterLink"
+                      >Twitter</label
+                    >
+                    <div class="input-group" id="formTwitterLink">
+                      <input
+                        name="twitterUrl"
+                        type="text"
+                        id="formTwitter"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="formAvatarLink"
+                      >Avatar</label
+                    >
+                    <div class="input-group" id="formAvatarLink">
+                      <input
+                        name="avatarFile"
+                        type="file"
+                        id="formAvatar"
+                        class="form-control"
+                        style="display: none"
+                        accept="image/*"
+                      />
+                    </div>
+                    <img
+                      id="displayAvatar"
+                      class="border w-100"
+                      src="images/avatars/default.jpg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      $("#formDateOfBirth").datepicker({
+        // Formats
+        // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
+        dateFormat: "dd/mm/yy",
+        container: "#informationModal",
+        // Your Icons
+        // as Bootstrap 4 is not using Glyphicons anymore
+        icons: {
+          time: "fa fa-clock-o",
+          date: "fa fa-calendar",
+          up: "fa fa-chevron-up",
+          down: "fa fa-chevron-down",
+          previous: "fa fa-chevron-left",
+          next: "fa fa-chevron-right",
+          today: "fa fa-check",
+          clear: "fa fa-trash",
+          close: "fa fa-times",
+        },
+      });
+    </script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/list.js"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

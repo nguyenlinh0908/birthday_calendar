@@ -49,7 +49,8 @@ $(document).ready(() => {
     fullName = $("#formFullName").val();
     dateOfBirth = $("#formDateOfBirth").val();
     gender = $("#formGender").val();
-    nationality = $("#formNationality").val();
+    nationalityName = $("#formNationality option:selected").text();
+    nationalityVal = $("#formNationality option:selected").val();
     facebook = $("#formFacebook").val();
     instagram = $("#formInsta").val();
     twitter = $("#formTwitter").val();
@@ -68,7 +69,7 @@ $(document).ready(() => {
     formData.append("fullName", fullName);
     formData.append("dateOfBirth", dateOfBirth);
     formData.append("gender", gender);
-    formData.append("nationality", nationality);
+    formData.append("nationality", `${nationalityVal}/${nationalityName}`);
     formData.append("facebookUrl", facebook);
     formData.append("instagramUrl", instagram);
     formData.append("twitterUrl", twitter);
@@ -87,6 +88,7 @@ $(document).ready(() => {
           bg: "bg-success",
         });
         getBirthdays();
+        $("#formInformation").trigger('reset')
       })
       .catch((error) => {
         console.error("Error:", error);

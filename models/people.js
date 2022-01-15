@@ -20,7 +20,7 @@ const peopleSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: "images/avatar/default.jpg",
+    default: "images/avatars/default.jpg",
   },
   facebookUrl: {
     type: String,
