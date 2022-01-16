@@ -12,7 +12,7 @@ const getBirthdaysOfMonth = async (req, res) => {
   if (month < 10) {
     month = `0${month + 1}`;
   }
-  //const { id, name, email, password, createAt } = req.user;
+  const { id, name, email, password, createAt } = req.user;
   try {
     const { month: monthAjax, status: ajaxCall } = req.body;
     ajaxCall ? (month = monthAjax) : (month = month);
@@ -21,7 +21,7 @@ const getBirthdaysOfMonth = async (req, res) => {
   }
   const birthdays = await People.find({
     dateOfBirth: { $regex: `[0-9]{2}\/${month}\/[0-9]{4}` },
-    createdBy: "61da5d22333a43f1c17ec6e0",
+    createdBy: id,
   }).exec();
   if (!birthdays) {
     throw new NotFoundError(`No birthday in month ${month}`);
