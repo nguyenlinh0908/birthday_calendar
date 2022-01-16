@@ -111,21 +111,8 @@ app.use(
     cookie: { maxAge: 60000 },
   })
 );
-app.use(
-  "/api/v1/birthday",
-  (req, res, next) => {
-    if (!req.route) {
-      res.render("errors/error_404");
-    } else {
-      next();
-    }
-  },
-  routerAPI
-);
-app.use(
-  "/",
-  routerUser
-);
+app.use("/api/v1/", routerAPI);
+app.use("/", routerUser);
 const PORT = process.env.PORT || 5000;
 const start = async () => {
   try {

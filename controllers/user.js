@@ -12,10 +12,10 @@ const login = (req, res) => {
 const register = (req, res) => {
   res.render("register");
 };
-const logout = (req, res)=>{
-  req.logout()
-  res.redirect('/')
-}
+const logout = (req, res) => {
+  req.logout();
+  res.redirect("/");
+};
 
 // create account
 const createAccount = async (req, res) => {
@@ -25,7 +25,7 @@ const createAccount = async (req, res) => {
     name: name,
     email: email,
     password: password,
-    createAt: `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`,
+    createAt: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
   };
   const accountCreated = await Account.create(validData);
   res.status(StatusCodes.CREATED).json({ accountCreated });
@@ -43,10 +43,26 @@ const findAccount = async (req, res) => {
 
   return res.status(StatusCodes.OK).redirect("/user");
 };
+const loginAPI = async (req, res) => {
+  const { email, password } = req.body;
+  if (email == "" || password == "") {
+    throw new BadRequestError("Please provide email and password");
+  }
+  const account = await Account.findOne({ email });
+  const token = account.createJWT();
+  if (!account) {
+    throw new UnauthenticatedError("Invalid Credentials");
+  }
+
+  return res
+    .status(StatusCodes.OK)
+    .json({ email: account.email, token: token });
+};
 module.exports = {
   login,
+  loginAPI,
   register,
   createAccount,
   findAccount,
-  logout
+  logout,
 };
