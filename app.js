@@ -1,7 +1,10 @@
 require("dotenv").config();
 const routerUser = require("./routers/user");
-const routerAPI = require("./routers/api");
+const routerAuth = require("./routers/api/auth");
+const routerBirthdays = require("./routers/api/birthdays");
 const bodyParser = require("body-parser");
+const authenticationUserAPI = require("./middleware/authentication");
+
 const cookieParse = require("cookie-parser");
 const express = require("express");
 const https = require("https");
@@ -111,7 +114,8 @@ app.use(
     cookie: { maxAge: 60000 },
   })
 );
-app.use("/api/v1/", routerAPI);
+app.use("/api/v1/auth", routerAuth);
+app.use("/api/v1/birthday", authenticationUserAPI, routerBirthdays);
 app.use("/", routerUser);
 const PORT = process.env.PORT || 5000;
 const start = async () => {
