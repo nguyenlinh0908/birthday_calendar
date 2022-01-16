@@ -17,6 +17,12 @@ const Account = require("./models/accounts");
 const path = require("path");
 const connectDB = require("./database/connect");
 const app = express();
+
+// Swagger
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./F6287-Birthday_Calendar-1-resolved.yaml");
+
 // const key = fs.readFileSync("./cert/CA/localhost/localhost.decrypted.key");
 // const cert = fs.readFileSync("./cert/CA/localhost/localhost.crt");
 // const server = https.createServer({ key, cert }, app);
@@ -114,6 +120,7 @@ app.use(
     cookie: { maxAge: 60000 },
   })
 );
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use("/api/v1/auth", routerAuth);
 app.use("/api/v1/birthday", authenticationUserAPI, routerBirthdays);
 app.use("/", routerUser);

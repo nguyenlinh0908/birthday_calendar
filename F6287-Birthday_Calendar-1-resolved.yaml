@@ -1,0 +1,172 @@
+swagger: "2.0"
+info:
+  version: "1"
+  title: Birthday Calendar
+  description: ""
+paths:
+  /api/v1/auth/login:
+    post:
+      operationId: POST_auth-login
+      summary: Auth Login
+      consumes:
+        - application/JSON
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+            example:
+              email: nguyenlinh982001@gmail.com
+              password: anhyeuem
+      responses:
+        default:
+          description: ""
+          schema: {}
+  /api/v1/auth/register:
+    post:
+      operationId: POST_auth-register
+      summary: Auth Register
+      consumes:
+        - application/JSON
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+            example:
+              email: nguyenlinh982001@gmail.com
+              password: anhyeuem
+      responses:
+        default:
+          description: ""
+          schema: {}
+  /api/v1/birthday/all:
+    get:
+      operationId: GET_birthday-all
+      summary: All Birthday
+      consumes:
+        - application/JSON
+      responses:
+        default:
+          description: ""
+          schema: {}
+  /api/v1/birthday/:
+    post:
+      operationId: POST_birthday
+      summary: Create Birthday
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: fullName
+          in: formData
+          type: string
+          default: John Doe
+        - name: dateOfBirth
+          in: formData
+          type: string
+          default: 01/01/2001
+        - name: gender
+          in: formData
+          type: string
+          default: male
+        - name: nationality
+          in: formData
+          type: string
+          default: Vietnam
+        - name: facebookUrl
+          in: formData
+          type: string
+          default: null
+        - name: instagramUrl
+          in: formData
+          type: string
+          default: null
+        - name: twitterUrl
+          in: formData
+          type: string
+          default: null
+        - name: avatarFile
+          in: formData
+          type: string
+          default: /home/nguyenling/Pictures/ng yêu/266021112_472158487636849_3761638067186858297_n.jpg
+      responses:
+        default:
+          description: ""
+          schema: {}
+  /api/v1/birthday/61e3cf3983be07f9160bfa9d:
+    get:
+      operationId: GET_birthday-61e3cf3983be07f9160bfa9d
+      summary: Get Birthday
+      consumes:
+        - text/plain
+      responses:
+        default:
+          description: ""
+          schema: {}
+    patch:
+      operationId: PATCH_birthday-61e3cf3983be07f9160bfa9d
+      summary: Update Birthday
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: fullName
+          in: formData
+          type: string
+          default: John Anna
+        - name: dateOfBirth
+          in: formData
+          type: string
+          default: 01/02/2001
+        - name: gender
+          in: formData
+          type: string
+          default: female
+        - name: nationality
+          in: formData
+          type: string
+          default: Japan
+        - name: facebookUrl
+          in: formData
+          type: string
+          default: null
+        - name: instagramUrl
+          in: formData
+          type: string
+          default: null
+        - name: twitterUrl
+          in: formData
+          type: string
+          default: null
+        - name: oldAvatar
+          in: formData
+          type: string
+          default: images/avatars/4bfdcebb-9716-454d-b880-57a1128723ef.jpg
+        - name: avatarFile
+          in: formData
+          type: string
+          default: /home/nguyenling/Downloads/150558998_1891019557725883_6000800576591425094_n.jpg
+      responses:
+        default:
+          description: ""
+          schema: {}
+  /api/v1/birthday/61e3cebcf15efd2783092982:
+    delete:
+      operationId: DELETE_birthday-61e3cebcf15efd2783092982
+      summary: Delete Birthday
+      consumes:
+        - text/plain
+      responses:
+        default:
+          description: ""
+          schema: {}
+definitions: {}
